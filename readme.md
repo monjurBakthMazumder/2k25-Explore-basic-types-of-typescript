@@ -1,74 +1,88 @@
 
+
 # 2K25: Explore Basic Types in TypeScript
 
-This project provides a practical introduction to the basic data types and TypeScript features. It is intended for developers who want to gain a solid understanding of TypeScript's type system and configuration.
+This project provides a practical and comprehensive introduction to the **basic data types**, **syntax**, and **core features** of TypeScript. It is ideal for developers who want a solid grasp of TypeScript’s static type-checking system and advanced JS enhancements.
 
 ---
 
-## TypeScript Configuration
+## 🛠 TypeScript Project Setup
 
-To set up a TypeScript project:
-
-1. Initialize the TypeScript configuration:
-
+### 1. Initialize TypeScript
 ```bash
 tsc --init
 ```
 
-2. Update the following options in your `tsconfig.json` file:
-
+### 2. Update `tsconfig.json`
 ```json
 {
-  "rootDir": "./src/",
-  "outDir": "./dist/",
-  "target": "es2016"
+  "compilerOptions": {
+    "rootDir": "./src/",
+    "outDir": "./dist/",
+    "target": "es2016",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true
+  }
 }
 ```
----
 
-## for run typescript
-- ts-node-dev - npm [https://www.npmjs.com/package/ts-node-dev]
-- npm i -g ts-node-dev --save-dev
-- for run:
--     ts-node-dev --respawn --transpile-only src/index.ts 
+### 3. Install ts-node-dev
+```bash
+npm install -g ts-node-dev
+```
 
-
---
-
-
-
-These settings define the source directory, the output directory, and the JavaScript target version.
-
----
-
-## Data Types in TypeScript
-
-TypeScript supports both **primitive** and **non-primitive** (reference) types.
-
-### Primitive Types
-
-- `number` – Example: `let age: number = 25;`
-- `string` – Example: `let name: string = "John";`
-- `boolean` – Example: `let isActive: boolean = true;`
-- `null` – Example: `let data: null = null;`
-- `undefined` – Example: `let temp: undefined = undefined;`
-- `symbol` – Example: `let uniqueId: symbol = Symbol('id');`
-
-### Non-Primitive Types
-
-- **Array** – Example: `let names: string[] = ["Alice", "Bob"];`
-- **Tuple** – Example: `let person: [number, string] = [1, "Alice"];`
-- **Object** – Example: 
-```ts
-let user: { id: number; name: string } = { id: 1, name: "John" };
+### 4. Run the project
+```bash
+ts-node-dev --respawn --transpile-only src/index.ts
 ```
 
 ---
 
-## Functions
+## 🧠 Understanding TypeScript Types
 
-### Normal Function
+TypeScript improves JavaScript by adding static types. This helps catch bugs during development, enables better tooling, and improves readability.
 
+---
+
+## 🔹 Primitive Types
+
+These are the most basic types in TypeScript:
+
+| Type       | Example                               | Description                          |
+|------------|----------------------------------------|--------------------------------------|
+| `number`   | `let age: number = 25;`                | Represents integers or floats        |
+| `string`   | `let name: string = "Alice";`          | Represents textual data              |
+| `boolean`  | `let isLoggedIn: boolean = false;`     | True or False values                 |
+| `null`     | `let data: null = null;`               | Intentional absence of a value       |
+| `undefined`| `let temp: undefined = undefined;`     | Uninitialized variable               |
+| `symbol`   | `let uniqueId: symbol = Symbol("id");` | Unique identifiers                   |
+
+---
+
+## 🔹 Non-Primitive (Reference) Types
+
+### Arrays
+```ts
+let names: string[] = ["Alice", "Bob"];
+let ages: Array<number> = [25, 30, 35];
+```
+
+### Tuples
+```ts
+let person: [number, string] = [1, "Alice"];
+```
+
+### Objects
+```ts
+let user: { id: number; name: string } = { id: 1, name: "Monjur" };
+```
+
+---
+
+## 🔹 Functions
+
+### Default Parameters
 ```ts
 function add(a: number, b: number = 10): number {
   return a + b;
@@ -76,17 +90,15 @@ function add(a: number, b: number = 10): number {
 ```
 
 ### Arrow Function
-
 ```ts
 const multiply = (x: number, y: number): number => x * y;
 ```
 
 ### Method Inside Object
-
 ```ts
 const account = {
   name: "Monjur",
-  balance: 0,
+  balance: 100,
   addBalance(amount: number): string {
     return `New balance: ${this.balance + amount}`;
   }
@@ -95,121 +107,191 @@ const account = {
 
 ---
 
-## Spread and Rest Operators
+## 🔹 Spread and Rest Operators
 
-### Spread (used to merge arrays or objects)
-
+### Spread Operator
 ```ts
-const array1 = ['a', 'b'];
-const array2 = ['c', 'd'];
-const mergedArray = [...array1, ...array2];
+const a = [1, 2];
+const b = [3, 4];
+const combined = [...a, ...b]; // [1, 2, 3, 4]
 
-const obj1 = { a: 1 };
-const obj2 = { b: 2 };
-const mergedObject = { ...obj1, ...obj2 };
+const objA = { name: "Alice" };
+const objB = { age: 25 };
+const person = { ...objA, ...objB }; // { name: "Alice", age: 25 }
 ```
 
-### Rest (used to collect multiple arguments)
-
+### Rest Parameters
 ```ts
-const greet = (...names: string[]) => {
+const greetAll = (...names: string[]) => {
   names.forEach(name => console.log(`Hello, ${name}`));
 };
-greet("Alice", "Bob", "Charlie");
+greetAll("Alice", "Bob", "Charlie");
 ```
 
 ---
 
-## Destructuring
+## 🔹 Destructuring
 
 ### Object Destructuring
-
 ```ts
 const person = {
-  name: {
-    first: "Monjur",
-    middle: "Bakth",
-    last: "Mazumder"
-  },
-  contact: "0123456789"
+  name: { first: "Monjur", last: "Mazumder" },
+  phone: "0123456789"
 };
 
 const {
-  contact: phoneNumber,
-  name: { middle: middleName }
+  phone,
+  name: { first }
 } = person;
+console.log(first); // "Monjur"
 ```
 
 ### Array Destructuring
-
 ```ts
-const friends = ['Alice', 'Bob', 'Charlie'];
+const friends = ["Alice", "Bob", "Charlie"];
 const [firstFriend, , thirdFriend] = friends;
 ```
 
 ---
 
-## Type Aliases
+## 🔹 Type Aliases
 
 ### Object Type Alias
-
 ```ts
 type TStudent = {
   name: string;
   age: number;
-  gender: string;
   contactNo?: string;
-  address: string;
 };
 
-const student1: TStudent = {
-  name: "Md Monjur Bakth Mazumder",
+const student: TStudent = {
+  name: "Monjur",
   age: 23,
-  gender: "male",
-  contactNo: "0123456789",
-  address: "Bangladesh"
+  contactNo: "01234"
 };
-
-const student2: TStudent = {
-  name: "Md Monjur Bakth Mazumder",
-  age: 23,
-  gender: "male",
-  address: "Bangladesh"
-};
-```
-
-### String Type Alias
-
-```ts
-type TUserName = string;
-const userName: TUserName = "Monjur";
 ```
 
 ### Function Type Alias
-
 ```ts
-type TAdd = (num1: number, num2: number) => number;
+type TAdd = (a: number, b: number) => number;
+const add: TAdd = (x, y) => x + y;
+```
 
-const calculateSum: TAdd = (a, b) => a + b;
-console.log(calculateSum(10, 15)); // Output: 25
+### Union & Intersection Types
+```ts
+type Admin = {
+  role: string;
+};
+
+type User = {
+  name: string;
+};
+
+type AdminUser = Admin & User; // Intersection
+
+const user: AdminUser = { name: "Monjur", role: "admin" };
 ```
 
 ---
 
-## Folder Structure
+## 🔹 Special Operators
+
+### Ternary
+```ts
+const age = 20;
+const status = age >= 18 ? "Adult" : "Minor";
+```
+
+### Optional Chaining
+```ts
+const user = {
+  name: "Monjur",
+  address: { city: "MB" }
+};
+
+const city = user?.address?.city;
+```
+
+### Nullish Coalescing (`??`)
+```ts
+const isAuthenticated = null;
+const userStatus = isAuthenticated ?? "Guest";
+```
+
+---
+
+## 🔹 Advanced Types
+
+### Unknown
+```ts
+const parseSpeed = (value: unknown) => {
+  if (typeof value === "number") {
+    console.log("Speed:", value);
+  } else if (typeof value === "string") {
+    const num = parseFloat(value);
+    console.log("Parsed Speed:", num);
+  }
+};
+```
+
+### Never
+```ts
+const throwError = (message: string): never => {
+  throw new Error(message);
+};
+```
+
+### Nullable
+```ts
+const greet = (name: string | null) => {
+  if (name) console.log(`Hello ${name}`);
+  else console.log("No name provided");
+};
+```
+
+---
+
+## 🔹 Enums
+
+```ts
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+const move = Direction.Left;
+```
+
+---
+
+## 🔹 Type Assertion
+
+```ts
+const input = document.getElementById("username") as HTMLInputElement;
+console.log(input.value);
+```
+
+---
+
+## 🗂 Folder Structure
 
 ```
 2k25-Explore-basic-types-of-typescript/
-├── src/            # TypeScript source files
-├── dist/           # Compiled JavaScript output
-├── tsconfig.json   # TypeScript configuration
-└── README.md       # Project documentation
+├── src/             # All TypeScript source files
+│   ├── index.ts     # Entry point
+│   └── examples/    # Example scripts (types, functions, etc.)
+├── dist/            # Compiled JavaScript output
+├── tsconfig.json    # TypeScript compiler configuration
+└── README.md        # This documentation file
 ```
 
 ---
 
-## Author
+## 👨‍💻 Author
 
 **Md Monjur Bakth Mazumder**  
 Full Stack Developer  
-Focused on clean, maintainable, and scalable software solutions.
+Passionate about building clean, maintainable, and scalable applications.  
+
