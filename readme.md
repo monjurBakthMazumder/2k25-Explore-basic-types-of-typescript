@@ -1,7 +1,7 @@
 
 # 2K25: Explore Basic Types in TypeScript
 
-This project provides a practical introduction to the basic data types and function structures in TypeScript. It is designed for developers seeking a clear and foundational understanding of TypeScript’s type system, configuration, and usage.
+This project provides a practical introduction to the basic data types in TypeScript. It is intended for developers who want to gain a solid understanding of TypeScript's type system and configuration.
 
 ---
 
@@ -9,13 +9,13 @@ This project provides a practical introduction to the basic data types and funct
 
 To set up a TypeScript project:
 
-1. Initialize the TypeScript compiler configuration:
+1. Initialize the TypeScript configuration:
 
 ```bash
 tsc --init
 ```
 
-2. Update your `tsconfig.json` with the recommended options:
+2. Update the following options in your `tsconfig.json` file:
 
 ```json
 {
@@ -25,13 +25,13 @@ tsc --init
 }
 ```
 
-These options help structure your project by separating source files from compiled output and targeting a modern version of JavaScript.
+These settings define the source directory, the output directory, and the JavaScript target version.
 
 ---
 
 ## Data Types in TypeScript
 
-TypeScript supports both **primitive** and **non-primitive** (reference) data types.
+TypeScript supports both **primitive** and **non-primitive** (reference) types.
 
 ### Primitive Types
 
@@ -46,138 +46,132 @@ TypeScript supports both **primitive** and **non-primitive** (reference) data ty
 
 - **Array** – Example: `let names: string[] = ["Alice", "Bob"];`
 - **Tuple** – Example: `let person: [number, string] = [1, "Alice"];`
-- **Object** – Example:  
-  ```ts
-  let user: { id: number; name: string } = { id: 1, name: "John" };
-  ```
-
----
-
-## Object, Optional, Readonly, and Literal Types
-
-```ts
-type TUser = {
-  country: "Bangladesh";           // Literal type
-  readonly firstName: string;      // Readonly property
-  middleName?: string;             // Optional property
-  lastName: string;
-};
-
-const user1: TUser = {
-  country: "Bangladesh",
-  firstName: "Md Monjur",
-  middleName: "Bakth",
-  lastName: "Mazumder",
-};
-
-const user2: TUser = {
-  country: "Bangladesh",
-  firstName: "Md Monjur",
-  lastName: "Mazumder", // Optional middleName omitted
-};
-```
+- **Object** – Example: `let user: { id: number; name: string } = { id: 1, name: "John" };`
 
 ---
 
 ## Functions in TypeScript
 
-TypeScript allows strongly typed function definitions, including default parameters, arrow functions, methods within objects, and callbacks.
+### Normal Function
 
-### Normal Function with Default Parameter
-
-```ts
+```typescript
 function add(num1: number, num2: number = 20): number {
   return num1 + num2;
 }
-add(10); // returns 30
+add(2, 2); // Result: 4
 ```
 
 ### Arrow Function
 
-```ts
+```typescript
 const addArrow = (num1: number, num2: number): number => {
   return num1 + num2;
 };
-addArrow(4, 5); // returns 9
+addArrow(4, 5); // Result: 9
 ```
 
-### Object with Method
+### Object Method
 
-```ts
+```typescript
 const user = {
   name: "Monjur",
   balance: 0,
   addBalance(balance: number): string {
-    return `My new balance is: ${this.balance + balance}`;
+    return `My new balance is : ${this.balance + balance}`;
   },
 };
 
-user.addBalance(500); // "My new balance is: 500"
+console.log(user.addBalance(50)); // Result: "My new balance is: 50"
 ```
 
-### Using `map()` with Arrow Function
+### Array Mapping
 
-```ts
-const numbers: number[] = [10, 20, 30, 40, 50];
-const squared: number[] = numbers.map((num: number): number => num * num);
-
-// Result: [100, 400, 900, 1600, 2500]
+```typescript
+const arr: number[] = [56, 324, 566, 534, 53, 45];
+const newArray: number[] = arr.map((elem: number): number => elem * elem);
+console.log(newArray); // Result: [3136, 104976, 320356, 285156, 2809, 2025]
 ```
 
 ---
 
 ## Spread and Rest Operators
 
-### Spread Operator
+### Spread Operator (Copying and Merging Arrays or Objects)
 
-The **spread operator** is used to *expand* elements of an array or object.
+```typescript
+const bros1: string[] = ['d', 'fd', 'fd'];
+const bros2: string[] = ['d', 'fd', 'fd'];
+bros1.push(...bros2); // Merging arrays
+console.log(bros1); // Result: ['d', 'fd', 'fd', 'd', 'fd', 'fd']
 
-- **Array Spread**: Merge two arrays into one.
-  
-```ts
-const frontendTeam: string[] = ['Alice', 'Bob'];
-const backendTeam: string[] = ['Charlie', 'Dave'];
 
-const fullTeam: string[] = [...frontendTeam, ...backendTeam];
-console.log(fullTeam); // Output: ['Alice', 'Bob', 'Charlie', 'Dave']
+const mentors1 = {
+  typescript: "a",
+  redux: "v",
+};
+
+const mentors2 = {
+  typescript: "wqe",
+  redux: "eq",
+};
+
+const mentorList = { ...mentors1, ...mentors2 };
+console.log(mentorList); // Result: { typescript: "wqe", redux: "eq" }
 ```
 
-- **Object Spread**: Merge two objects, where the last property takes precedence in case of a conflict.
+### Rest Operator (Handling Variable Number of Arguments)
 
-```ts
-const mentorGroup1 = {
-  typescript: "John",
-  redux: "Mike"
+```typescript
+const greetFriend = (...friends: string[]) => {
+  friends.forEach((friend: string) => console.log(`hi ${friend}`));
 };
 
-const mentorGroup2 = {
-  redux: "Anna", // This will override 'redux' from mentorGroup1
-  docker: "Sara"
-};
-
-const allMentors = {
-  ...mentorGroup1,
-  ...mentorGroup2
-};
-
-console.log(allMentors);
-// Output: { typescript: 'John', redux: 'Anna', docker: 'Sara' }
+greetFriend('John', 'Alice', 'Bob'); // Result: "hi John", "hi Alice", "hi Bob"
 ```
 
-### Rest Operator
+---
 
-The **rest operator** is used to *collect* arguments into an array.
+## Destructuring in TypeScript
 
-```ts
-const greetFriends = (...friends: string[]) => {
-  friends.forEach((friend: string) => console.log(`Hi, ${friend}!`));
+### Object Destructuring
+
+```typescript
+const user = {
+  id: 579416,
+  name: {
+    firstName: "Monjur",
+    middleName: "Bakth",
+    lastName: "Mazumder",
+  },
+  contact: "023123123123",
+  address: "BD",
 };
 
-greetFriends("Alice", "Bob", "Charlie");
-// Output:
-// Hi, Alice!
-// Hi, Bob!
-// Hi, Charlie!
+// Destructuring user object with meaningful variable names
+const {
+  contact: phoneNumber,
+  name: { middleName: midName },
+} = user;
+
+console.log(phoneNumber); // Result: "023123123123"
+console.log(midName); // Result: "Bakth"
+```
+
+### Array Destructuring
+
+```typescript
+const myFriends = ['John', 'Alice', 'Bob', 'Charlie'];
+
+// Destructure the first and third elements from the array
+const [friend1, , friend3] = myFriends;
+console.log(friend1); // Result: "John"
+console.log(friend3); // Result: "Bob"
+
+// Destructure using rest operator to capture the remaining elements
+const [firstFriend, secondFriend, ...remainingFriends] = myFriends;
+console.log(firstFriend); // Result: "John"
+console.log(secondFriend); // Result: "Alice"
+console.log(remainingFriends); // Result: ["Bob", "Charlie"]
 ```
 
 ---
@@ -198,4 +192,8 @@ greetFriends("Alice", "Bob", "Charlie");
 
 **Md Monjur Bakth Mazumder**  
 Full Stack Developer  
-Dedicated to building clean, maintainable, and scalable software solutions.
+Focused on clean, maintainable, and scalable software solutions.
+
+---
+
+This document provides a comprehensive guide to basic TypeScript data types, functions, and useful concepts like spread/rest operators and destructuring. Let me know if you need any further details or changes.
