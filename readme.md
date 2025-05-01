@@ -24,6 +24,18 @@ tsc --init
   "target": "es2016"
 }
 ```
+---
+
+## for run typescript
+- ts-node-dev - npm [https://www.npmjs.com/package/ts-node-dev]
+- npm i -g ts-node-dev --save-dev
+- for run:
+-     ts-node-dev --respawn --transpile-only src/index.ts 
+
+
+--
+
+
 
 These settings define the source directory, the output directory, and the JavaScript target version.
 
