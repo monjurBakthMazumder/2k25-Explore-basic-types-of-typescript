@@ -1,7 +1,7 @@
 
 # 2K25: Explore Basic Types in TypeScript
 
-This project provides a practical introduction to the basic data types in TypeScript. It is intended for developers who want to gain a solid understanding of TypeScript's type system and configuration.
+This project provides a practical introduction to the basic data types and TypeScript features. It is intended for developers who want to gain a solid understanding of TypeScript's type system and configuration.
 
 ---
 
@@ -46,132 +46,140 @@ TypeScript supports both **primitive** and **non-primitive** (reference) types.
 
 - **Array** – Example: `let names: string[] = ["Alice", "Bob"];`
 - **Tuple** – Example: `let person: [number, string] = [1, "Alice"];`
-- **Object** – Example: `let user: { id: number; name: string } = { id: 1, name: "John" };`
+- **Object** – Example: 
+```ts
+let user: { id: number; name: string } = { id: 1, name: "John" };
+```
 
 ---
 
-## Functions in TypeScript
+## Functions
 
 ### Normal Function
 
-```typescript
-function add(num1: number, num2: number = 20): number {
-  return num1 + num2;
+```ts
+function add(a: number, b: number = 10): number {
+  return a + b;
 }
-add(2, 2); // Result: 4
 ```
 
 ### Arrow Function
 
-```typescript
-const addArrow = (num1: number, num2: number): number => {
-  return num1 + num2;
-};
-addArrow(4, 5); // Result: 9
+```ts
+const multiply = (x: number, y: number): number => x * y;
 ```
 
-### Object Method
+### Method Inside Object
 
-```typescript
-const user = {
+```ts
+const account = {
   name: "Monjur",
   balance: 0,
-  addBalance(balance: number): string {
-    return `My new balance is : ${this.balance + balance}`;
-  },
+  addBalance(amount: number): string {
+    return `New balance: ${this.balance + amount}`;
+  }
 };
-
-console.log(user.addBalance(50)); // Result: "My new balance is: 50"
-```
-
-### Array Mapping
-
-```typescript
-const arr: number[] = [56, 324, 566, 534, 53, 45];
-const newArray: number[] = arr.map((elem: number): number => elem * elem);
-console.log(newArray); // Result: [3136, 104976, 320356, 285156, 2809, 2025]
 ```
 
 ---
 
 ## Spread and Rest Operators
 
-### Spread Operator (Copying and Merging Arrays or Objects)
+### Spread (used to merge arrays or objects)
 
-```typescript
-const bros1: string[] = ['d', 'fd', 'fd'];
-const bros2: string[] = ['d', 'fd', 'fd'];
-bros1.push(...bros2); // Merging arrays
-console.log(bros1); // Result: ['d', 'fd', 'fd', 'd', 'fd', 'fd']
+```ts
+const array1 = ['a', 'b'];
+const array2 = ['c', 'd'];
+const mergedArray = [...array1, ...array2];
 
-
-const mentors1 = {
-  typescript: "a",
-  redux: "v",
-};
-
-const mentors2 = {
-  typescript: "wqe",
-  redux: "eq",
-};
-
-const mentorList = { ...mentors1, ...mentors2 };
-console.log(mentorList); // Result: { typescript: "wqe", redux: "eq" }
+const obj1 = { a: 1 };
+const obj2 = { b: 2 };
+const mergedObject = { ...obj1, ...obj2 };
 ```
 
-### Rest Operator (Handling Variable Number of Arguments)
+### Rest (used to collect multiple arguments)
 
-```typescript
-const greetFriend = (...friends: string[]) => {
-  friends.forEach((friend: string) => console.log(`hi ${friend}`));
+```ts
+const greet = (...names: string[]) => {
+  names.forEach(name => console.log(`Hello, ${name}`));
 };
-
-greetFriend('John', 'Alice', 'Bob'); // Result: "hi John", "hi Alice", "hi Bob"
+greet("Alice", "Bob", "Charlie");
 ```
 
 ---
 
-## Destructuring in TypeScript
+## Destructuring
 
 ### Object Destructuring
 
-```typescript
-const user = {
-  id: 579416,
+```ts
+const person = {
   name: {
-    firstName: "Monjur",
-    middleName: "Bakth",
-    lastName: "Mazumder",
+    first: "Monjur",
+    middle: "Bakth",
+    last: "Mazumder"
   },
-  contact: "023123123123",
-  address: "BD",
+  contact: "0123456789"
 };
 
-// Destructuring user object with meaningful variable names
 const {
   contact: phoneNumber,
-  name: { middleName: midName },
-} = user;
-
-console.log(phoneNumber); // Result: "023123123123"
-console.log(midName); // Result: "Bakth"
+  name: { middle: middleName }
+} = person;
 ```
 
 ### Array Destructuring
 
-```typescript
-const myFriends = ['John', 'Alice', 'Bob', 'Charlie'];
+```ts
+const friends = ['Alice', 'Bob', 'Charlie'];
+const [firstFriend, , thirdFriend] = friends;
+```
 
-// Destructure the first and third elements from the array
-const [friend1, , friend3] = myFriends;
-console.log(friend1); // Result: "John"
-console.log(friend3); // Result: "Bob"
+---
 
-// Destructure using rest operator to capture the remaining elements
-const [firstFriend, secondFriend, ...remainingFriends] = myFriends;
-console.log(firstFriend); // Result: "John"
-console.log(secondFriend); // Result: "Alice"
-console.log(remainingFriends); // Result: ["Bob", "Charlie"]
+## Type Aliases
+
+### Object Type Alias
+
+```ts
+type TStudent = {
+  name: string;
+  age: number;
+  gender: string;
+  contactNo?: string;
+  address: string;
+};
+
+const student1: TStudent = {
+  name: "Md Monjur Bakth Mazumder",
+  age: 23,
+  gender: "male",
+  contactNo: "0123456789",
+  address: "Bangladesh"
+};
+
+const student2: TStudent = {
+  name: "Md Monjur Bakth Mazumder",
+  age: 23,
+  gender: "male",
+  address: "Bangladesh"
+};
+```
+
+### String Type Alias
+
+```ts
+type TUserName = string;
+const userName: TUserName = "Monjur";
+```
+
+### Function Type Alias
+
+```ts
+type TAdd = (num1: number, num2: number) => number;
+
+const calculateSum: TAdd = (a, b) => a + b;
+console.log(calculateSum(10, 15)); // Output: 25
 ```
 
 ---
@@ -193,7 +201,3 @@ console.log(remainingFriends); // Result: ["Bob", "Charlie"]
 **Md Monjur Bakth Mazumder**  
 Full Stack Developer  
 Focused on clean, maintainable, and scalable software solutions.
-
----
-
-This document provides a comprehensive guide to basic TypeScript data types, functions, and useful concepts like spread/rest operators and destructuring. Let me know if you need any further details or changes.
