@@ -1,3 +1,4 @@
+
 # 2K25: Explore Basic Types in TypeScript
 
 This project provides a practical introduction to the basic data types and function structures in TypeScript. It is designed for developers seeking a clear and foundational understanding of TypeScript’s type system, configuration, and usage.
@@ -121,6 +122,62 @@ const numbers: number[] = [10, 20, 30, 40, 50];
 const squared: number[] = numbers.map((num: number): number => num * num);
 
 // Result: [100, 400, 900, 1600, 2500]
+```
+
+---
+
+## Spread and Rest Operators
+
+### Spread Operator
+
+The **spread operator** is used to *expand* elements of an array or object.
+
+- **Array Spread**: Merge two arrays into one.
+  
+```ts
+const frontendTeam: string[] = ['Alice', 'Bob'];
+const backendTeam: string[] = ['Charlie', 'Dave'];
+
+const fullTeam: string[] = [...frontendTeam, ...backendTeam];
+console.log(fullTeam); // Output: ['Alice', 'Bob', 'Charlie', 'Dave']
+```
+
+- **Object Spread**: Merge two objects, where the last property takes precedence in case of a conflict.
+
+```ts
+const mentorGroup1 = {
+  typescript: "John",
+  redux: "Mike"
+};
+
+const mentorGroup2 = {
+  redux: "Anna", // This will override 'redux' from mentorGroup1
+  docker: "Sara"
+};
+
+const allMentors = {
+  ...mentorGroup1,
+  ...mentorGroup2
+};
+
+console.log(allMentors);
+// Output: { typescript: 'John', redux: 'Anna', docker: 'Sara' }
+```
+
+### Rest Operator
+
+The **rest operator** is used to *collect* arguments into an array.
+
+```ts
+const greetFriends = (...friends: string[]) => {
+  friends.forEach((friend: string) => console.log(`Hi, ${friend}!`));
+};
+
+greetFriends("Alice", "Bob", "Charlie");
+// Output:
+// Hi, Alice!
+// Hi, Bob!
+// Hi, Charlie!
 ```
 
 ---
