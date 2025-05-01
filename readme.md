@@ -292,6 +292,9 @@ console.log(input.value);
 ## 👨‍💻 Author
 
 **Md Monjur Bakth Mazumder**  
-Full Stack Developer  
+Software Engineer & Lead Frontend Developer  
+[Qrinux](https://www.qrinux.com/)  
+[Email me](mailto:md.monjurmbm2001@gmail.com)  
+[Portfolio](https://mdmonjurbakthmazumder.netlify.app)  
 Passionate about building clean, maintainable, and scalable applications.  
 
