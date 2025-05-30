@@ -460,12 +460,15 @@ This guide demonstrates TypeScript concepts like:
 
 ---
 
-## Author
+# Author
 
 **Md Monjur Bakth Mazumder**  
-Software Engineer & Lead Frontend Developer  
-[Qrinux](https://www.qrinux.com/)  
-[Email me](mailto:md.monjurmbm2001@gmail.com)  
-[Portfolio](https://mdmonjurbakthmazumder.netlify.app)  
-Passionate about building clean, maintainable, and scalable applications.  
+Software Engineer & Lead Frontend Developer at [Qrinux](https://www.qrinux.com/)  
+Web Developer at Velocity Digital Inc.
+Web Instructor at Parrots Academy
+
+📧 [Email me](mailto:md.monjurmbm2001@gmail.com)  
+🌐 [Portfolio](https://mdmonjurbakthmazumder.netlify.app)
+
+Passionate about building clean, maintainable, and scalable applications.
 
