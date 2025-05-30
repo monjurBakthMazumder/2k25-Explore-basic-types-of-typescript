@@ -465,7 +465,7 @@ This guide demonstrates TypeScript concepts like:
 **Md Monjur Bakth Mazumder**  
 Software Engineer & Lead Frontend Developer at [Qrinux](https://www.qrinux.com/)  
 Web Developer at Velocity Digital Inc.  
-Web Instructor at Parrots Academy
+Web Instructor at [Parrots Academy](https://www.parrotsacademy.com/)
 
 📧 [Email me](mailto:md.monjurmbm2001@gmail.com)  
 🌐 [Portfolio](https://mdmonjurbakthmazumder.netlify.app)
